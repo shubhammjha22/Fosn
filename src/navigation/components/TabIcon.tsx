@@ -59,7 +59,7 @@ const CustomTabBar = ({
 
   return (
     <Fragment>
-      <View className="flex-row justify-around items-center bg-white py-3 border-t border-gray-200">
+      {/* <View className="flex-row justify-around items-center bg-white py-3 border-t border-gray-200">
         {tabIcons.map((tab, index) => {
           const isFocused = state.index === index;
           const onPress = () => {
@@ -87,6 +87,56 @@ const CustomTabBar = ({
               } items-center justify-center`}>
               <TabIcon
                 //@ts-ignore
+                icon={tab.icon}
+                isFocused={isFocused}
+                isSpecial={tab.special}
+              />
+            </TouchableOpacity>
+          );
+        })}
+      </View> */}
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+          backgroundColor: 'white',
+          paddingVertical: 12, // Tailwind py-3 ~12px
+          borderTopWidth: 1,
+          borderColor: '#E5E7EB', // Tailwind gray-200
+        }}>
+        {tabIcons.map((tab, index) => {
+          const isFocused = state.index === index;
+          const onPress = () => {
+            if (isAuthenticated && tab.name === 'Profile') {
+              handleProfilePress();
+              return;
+            }
+            const event = navigation.emit({
+              type: 'tabPress',
+              target: state.routes[index].key,
+            });
+            if (!isFocused && !event.defaultPrevented) {
+              navigation.navigate(state.routes[index].name);
+            }
+          };
+
+          return (
+            <TouchableOpacity
+              key={tab.name}
+              onPress={onPress}
+              style={[
+                {alignItems: 'center', justifyContent: 'center'},
+                tab.name === 'Shorts'
+                  ? {
+                      backgroundColor: '#2563EB', // Tailwind blue-600
+                      padding: 8, // Tailwind p-2 ~8px
+                      borderRadius: 9999, // rounded-full
+                    }
+                  : {},
+              ]}>
+              <TabIcon
+                // @ts-ignore
                 icon={tab.icon}
                 isFocused={isFocused}
                 isSpecial={tab.special}

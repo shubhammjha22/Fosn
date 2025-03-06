@@ -1,6 +1,7 @@
 import {
   Image,
   ScrollView,
+  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
@@ -99,35 +100,114 @@ const HomeScreen = ({navigation}: any) => {
   };
 
   return (
-    <SafeAreaView className="bg-white flex-1">
+    // <SafeAreaView className="bg-white flex-1">
+    //   <ScrollView>
+    //     <View className="flex-1 p-4 min-h-20 ">
+    //       <View className="p-1 px-3 relative flex items-center justify-between flex-row bg-slate-200 rounded-lg">
+    //         <TextInput
+    //           placeholder="Search..."
+    //           style={{color: 'black'}}
+    //           className="p-2 flex-1 placeholder:text-black"
+    //         />
+    //         <Search className="w-5 h-5 " />
+    //       </View>
+    //     </View>
+
+    //     <View className="px-4 mt-4 mb-6">
+    //       <ScrollView
+    //         horizontal
+    //         pagingEnabled
+    //         showsHorizontalScrollIndicator={false}
+    //         className="rounded-lg"
+    //         onScroll={handleScroll}
+    //         scrollEventThrottle={16}>
+    //         {banners.map(banner => (
+    //           <TouchableOpacity
+    //             key={banner.id}
+    //             onPress={banner.onPress}
+    //             className="mr-2">
+    //             <Image
+    //               source={{uri: banner.image}}
+    //               className="w-[350px] h-[150px] rounded-lg bg-slate-400"
+    //               resizeMode="cover"
+    //             />
+    //           </TouchableOpacity>
+    //         ))}
+    //       </ScrollView>
+
+    //       {/* Pagination Dots */}
+    //       <View className="flex-row gap-2 justify-center -mt-5 space-x-2">
+    //         {banners.map((_, index) => (
+    //           <View
+    //             key={index}
+    //             className={`w-2 h-2 rounded-full ${
+    //               index === currentBannerIndex ? 'bg-gray-600' : 'bg-gray-300'
+    //             }`}
+    //           />
+    //         ))}
+    //       </View>
+    //     </View>
+
+    //     <View className="px-4">
+    //       <Text className="text-xl font-bold mb-4">Trending Fashion</Text>
+
+    //       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+    //         {trendingFashion.map(item => (
+    //           <TouchableOpacity
+    //             key={item.id}
+    //             className="mr-4"
+    //             onPress={() => navigation.navigate('ProductDetails', {item})}>
+    //             <Image className="w-32 h-60 rounded-lg bg-slate-400" />
+    //           </TouchableOpacity>
+    //         ))}
+    //       </ScrollView>
+    //     </View>
+
+    //     <View className="px-4 mt-6">
+    //       <Text className="text-xl font-bold mb-4">Latest Products</Text>
+
+    //       <View className="flex flex-row justify-between">
+    //         {latestProducts.map(item => (
+    //           <TouchableOpacity
+    //             key={item.id}
+    //             className="mr-4"
+    //             onPress={() => navigation.navigate('ProductDetails', {item})}>
+    //             <Image className="w-[12rem] h-60 rounded-lg bg-slate-400" />
+    //           </TouchableOpacity>
+    //         ))}
+    //       </View>
+    //     </View>
+    //   </ScrollView>
+    // </SafeAreaView>
+    <SafeAreaView style={styles.safeArea}>
       <ScrollView>
-        <View className="flex-1 p-4 min-h-20 ">
-          <View className="p-1 px-3 relative flex items-center justify-between flex-row bg-slate-200 rounded-lg">
+        <View style={styles.searchContainer}>
+          <View style={styles.searchInputContainer}>
             <TextInput
               placeholder="Search..."
-              style={{color: 'black'}}
-              className="p-2 flex-1 placeholder:text-black"
+              style={styles.searchInput}
+              placeholderTextColor="black"
             />
-            <Search className="w-5 h-5 " />
+            <Search width={20} height={20} />
           </View>
         </View>
 
-        <View className="px-4 mt-4 mb-6">
+        <View style={styles.bannerContainer}>
           <ScrollView
             horizontal
             pagingEnabled
             showsHorizontalScrollIndicator={false}
-            className="rounded-lg"
+            style={styles.bannerScrollView}
             onScroll={handleScroll}
             scrollEventThrottle={16}>
             {banners.map(banner => (
               <TouchableOpacity
                 key={banner.id}
                 onPress={banner.onPress}
-                className="mr-2">
+                style={styles.bannerButton}>
                 <Image
                   source={{uri: banner.image}}
-                  className="w-[350px] h-[150px] rounded-lg bg-slate-400"
+                  style={styles.bannerImage}
                   resizeMode="cover"
                 />
               </TouchableOpacity>
@@ -135,43 +215,46 @@ const HomeScreen = ({navigation}: any) => {
           </ScrollView>
 
           {/* Pagination Dots */}
-          <View className="flex-row gap-2 justify-center -mt-5 space-x-2">
+          <View style={styles.paginationDotsContainer}>
             {banners.map((_, index) => (
               <View
                 key={index}
-                className={`w-2 h-2 rounded-full ${
-                  index === currentBannerIndex ? 'bg-gray-600' : 'bg-gray-300'
-                }`}
+                style={[
+                  styles.paginationDot,
+                  index === currentBannerIndex
+                    ? styles.paginationDotActive
+                    : styles.paginationDotInactive,
+                ]}
               />
             ))}
           </View>
         </View>
 
-        <View className="px-4">
-          <Text className="text-xl font-bold mb-4">Trending Fashion</Text>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>Trending Fashion</Text>
 
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {trendingFashion.map(item => (
               <TouchableOpacity
                 key={item.id}
-                className="mr-4"
+                style={styles.trendingItem}
                 onPress={() => navigation.navigate('ProductDetails', {item})}>
-                <Image className="w-32 h-60 rounded-lg bg-slate-400" />
+                <Image style={styles.trendingImage} />
               </TouchableOpacity>
             ))}
           </ScrollView>
         </View>
 
-        <View className="px-4 mt-6">
-          <Text className="text-xl font-bold mb-4">Latest Products</Text>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>Latest Products</Text>
 
-          <View className="flex flex-row justify-between">
+          <View style={styles.latestProductsContainer}>
             {latestProducts.map(item => (
               <TouchableOpacity
                 key={item.id}
-                className="mr-4"
+                style={styles.latestProductItem}
                 onPress={() => navigation.navigate('ProductDetails', {item})}>
-                <Image className="w-[12rem] h-60 rounded-lg bg-slate-400" />
+                <Image style={styles.latestProductImage} />
               </TouchableOpacity>
             ))}
           </View>
@@ -180,5 +263,97 @@ const HomeScreen = ({navigation}: any) => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  searchContainer: {
+    flex: 1,
+    padding: 16,
+    minHeight: 80,
+  },
+  searchInputContainer: {
+    padding: 4,
+    paddingHorizontal: 12,
+    position: 'relative',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#e2e8f0',
+    borderRadius: 8,
+  },
+  searchInput: {
+    padding: 8,
+    flex: 1,
+    color: 'black',
+  },
+  bannerContainer: {
+    paddingHorizontal: 16,
+    marginTop: 16,
+    marginBottom: 24,
+  },
+  bannerScrollView: {
+    borderRadius: 8,
+  },
+  bannerButton: {
+    marginRight: 8,
+  },
+  bannerImage: {
+    width: 350,
+    height: 150,
+    borderRadius: 8,
+    backgroundColor: '#94a3b8',
+  },
+  paginationDotsContainer: {
+    flexDirection: 'row',
+    gap: 8,
+    justifyContent: 'center',
+    marginTop: -20,
+  },
+  paginationDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+  },
+  paginationDotActive: {
+    backgroundColor: '#4b5563',
+  },
+  paginationDotInactive: {
+    backgroundColor: '#d1d5db',
+  },
+  sectionContainer: {
+    paddingHorizontal: 16,
+    marginTop: 24,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 16,
+  },
+  trendingItem: {
+    marginRight: 16,
+  },
+  trendingImage: {
+    width: 128,
+    height: 240,
+    borderRadius: 8,
+    backgroundColor: '#94a3b8',
+  },
+  latestProductsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  latestProductItem: {
+    marginRight: 16,
+  },
+  latestProductImage: {
+    width: 192, // 12rem converted to pixels
+    height: 240,
+    borderRadius: 8,
+    backgroundColor: '#94a3b8',
+  },
+});
 
 export default HomeScreen;

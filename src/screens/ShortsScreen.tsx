@@ -13,9 +13,14 @@ const shortsData = [
 
 const ShortsScreen = () => {
   return (
+    // <ScrollView>
+    //   <View className="flex-1 justify-center items-center">
+    //     <Text className="text-black text-2xl">Dummy </Text>
+    //   </View>
+    // </ScrollView>
     <ScrollView>
-      <View className="flex-1 justify-center items-center">
-        <Text className="text-black text-2xl">Dummy </Text>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={{color: 'black', fontSize: 24}}>Dummy</Text>
       </View>
     </ScrollView>
   );

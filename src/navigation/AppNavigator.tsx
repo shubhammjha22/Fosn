@@ -51,9 +51,11 @@ const AppNavigator = ({
           },
           headerLeft: () => (
             <TouchableOpacity
-              className="px-4"
+              style={{paddingHorizontal: 16}}
+              //   className="px-4"
               onPress={() => navigation.navigate('Home')}>
-              <ArrowLeft className="text-black ml-12 w-32" size={24} />
+              {/* <ArrowLeft className="text-black ml-12 w-32" size={24} /> */}
+              <ArrowLeft style={{marginLeft: 2, width: 128}} size={24} />
             </TouchableOpacity>
           ),
         })}
