@@ -7,7 +7,6 @@ import {
   View,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {MagnifyingGlassIcon} from 'react-native-heroicons/outline';
 import {Search} from 'lucide-react-native';
 import {useState} from 'react';
 
@@ -106,13 +105,13 @@ const HomeScreen = ({navigation}: any) => {
           <View className="p-1 px-3 relative flex items-center justify-between flex-row bg-slate-200 rounded-lg">
             <TextInput
               placeholder="Search..."
-              className="p-2 flex-1 placeholder:text-black relative text-black"
+              style={{color: 'black'}}
+              className="p-2 flex-1 placeholder:text-black"
             />
             <Search className="w-5 h-5 " />
           </View>
         </View>
 
-        {/* ADD Banner code here  */}
         <View className="px-4 mt-4 mb-6">
           <ScrollView
             horizontal
@@ -135,7 +134,7 @@ const HomeScreen = ({navigation}: any) => {
             ))}
           </ScrollView>
 
-          {/* Synchronized Pagination Dots */}
+          {/* Pagination Dots */}
           <View className="flex-row gap-2 justify-center -mt-5 space-x-2">
             {banners.map((_, index) => (
               <View
